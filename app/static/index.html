@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign Translator</title>
+<style>
+  :root { --bg:#f7f7f8; --card:#fff; --text:#1a1a1a; --accent:#2563eb; --warn:#d97706; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#111; --card:#1c1c1e; --text:#f2f2f2; --accent:#60a5fa; --warn:#fbbf24; }
+  }
+  body { margin:0; font-family:system-ui,sans-serif; background:var(--bg); color:var(--text); }
+  main { display:grid; grid-template-columns:1.4fr 1fr; gap:16px; padding:16px; max-width:1100px; margin:auto; }
+  @media (max-width:800px) { main { grid-template-columns:1fr; } }
+  .card { background:var(--card); border-radius:12px; padding:16px; }
+  img { width:100%; border-radius:8px; }
+  #sentence { font-size:1.8rem; min-height:3rem; }
+  #bar { height:14px; background:var(--accent); width:0%; border-radius:7px; transition:width .3s; }
+  button { font-size:1rem; padding:10px 16px; margin:4px; border-radius:8px; border:0; background:var(--accent); color:#fff; cursor:pointer; }
+</style>
+</head>
+<body>
+<main>
+  <div class="card"><img src="/video" alt="Live camera with hand skeleton"></div>
+  <div class="card">
+    <h3>Current sign: <span id="sign">-</span></h3>
+    <div style="background:#8883;border-radius:7px"><div id="bar"></div></div>
+    <p id="hint"></p>
+    <h3>Sentence</h3>
+    <div id="sentence" aria-live="polite"></div>
+    <p>Suggestions: <span id="sugg"></span></p>
+    <button onclick="speak()">Speak</button>
+  </div>
+</main>
+<script>
+const ws = new WebSocket(`ws://${location.host}/ws`);
+ws.onmessage = (e) => {
+  const d = JSON.parse(e.data), p = d.prediction, c = d.context;
+  document.getElementById('sign').textContent = p.sign;
+  document.getElementById('bar').style.width = (p.confidence*100) + '%';
+  document.getElementById('hint').textContent = p.confidence < 0.6
+    ? `Not sure - did you mean ${p.top3[0][0]} or ${p.top3[1][0]}?` : '';
+  document.getElementById('sentence').textContent = c.sentence;
+  document.getElementById('sugg').textContent = c.suggestions.join(', ') || '-';
+};
+function speak(){ speechSynthesis.speak(new SpeechSynthesisUtterance(document.getElementById('sentence').textContent)); }
+</script>
+</body>
+</html>

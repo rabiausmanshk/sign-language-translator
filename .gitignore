@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.ipynb_checkpoints/
+# datasets are big - share via Drive, never commit
+data/raw/*
+data/my_recordings/*
+data/processed/*
+!data/**/.gitkeep

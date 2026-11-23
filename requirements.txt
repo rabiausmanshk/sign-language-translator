@@ -1,0 +1,10 @@
+# Core (everyone) - use Python 3.10 or 3.11
+numpy<2
+pandas
+pyarrow
+scikit-learn
+mediapipe==0.10.14
+fastapi
+uvicorn[standard]
+python-dotenv
+pytest

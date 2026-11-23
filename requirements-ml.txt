@@ -1,0 +1,4 @@
+# Only for the Vision/ML person (or Colab)
+-r requirements.txt
+torch
+matplotlib
