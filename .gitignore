@@ -8,3 +8,5 @@ data/raw/*
 data/my_recordings/*
 data/processed/*
 !data/**/.gitkeep
+
+.venv*/
