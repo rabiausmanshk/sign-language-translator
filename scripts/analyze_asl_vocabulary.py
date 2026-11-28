@@ -13,8 +13,8 @@ OUTPUT_DIR = Path("data/processed/vocabulary_analysis")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Initial screening criteria, NOT final vocabulary rules
-MIN_TRAIN_VIDEOS = 20
-MIN_TRAIN_SIGNERS = 5
+MIN_TRAIN_VIDEOS = 12
+MIN_TRAIN_SIGNERS = 
 
 # Our preferred everyday vocabulary
 PREFERRED_SIGNS = [

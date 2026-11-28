@@ -1,12 +1,39 @@
-.venv/
+# Python
 __pycache__/
-*.pyc
-.env
-.ipynb_checkpoints/
-# datasets are big - share via Drive, never commit
-data/raw/*
-data/my_recordings/*
-data/processed/*
-!data/**/.gitkeep
+*.py[cod]
+.pytest_cache/
 
+# Virtual environment
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Raw datasets
+data/raw/
+data/processed/
+
+# Model files and checkpoints
+*.pt
+*.pth
+*.pkl
+*.joblib
+*.h5
+
+# Generated outputs
+outputs/
+logs/
+
+# Personal recordings and media (never commit)
+data/my_recordings/
+*.npy
+*.npz
+*.mp4
+
+# Misc
 .venv*/
+.ipynb_checkpoints/
+
+
+# Personal recordings and media (never commit)
